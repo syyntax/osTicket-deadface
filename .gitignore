@@ -20,3 +20,9 @@ stage
 include/mpdf/ttfontdata
 include/mpdf/tmp
 nbproject/
+
+# Docker/local deployment
+.env
+
+# Internal event planning notes (staff roster, sponsors, lore) - keep local
+DEADFACE.md

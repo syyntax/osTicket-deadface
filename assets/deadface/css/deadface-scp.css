@@ -1,0 +1,228 @@
+/* DEADFACE CTF staff panel theme: branded chrome, light work surfaces for
+   legibility during live support. Visual only: never adds or changes text. */
+
+:root {
+    /* Brand hues darkened enough to read on the light content area. */
+    --df-ink-purple: #6a00d4;
+    --df-ink-pink: #c8005a;
+}
+
+/* ---- Page ---- */
+html, body {
+    background-color: var(--df-bg);
+    background-image: var(--df-grid);
+    background-size: 40px 40px;
+    background-attachment: fixed;
+}
+body, input, select, textarea, button {
+    font-family: var(--df-font-body);
+}
+::selection {
+    background: rgba(128, 0, 255, 0.25);
+}
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, .button:focus-visible {
+    outline: 2px solid var(--df-purple);
+    outline-offset: 2px;
+}
+
+/* ---- Header ---- */
+#header {
+    background: linear-gradient(90deg, var(--df-pink), var(--df-purple)) top / 100% 3px no-repeat,
+                var(--df-bg-raised);
+    border-left-color: var(--df-border-strong);
+    border-right-color: var(--df-border-strong);
+    box-shadow: none;
+}
+#header p {
+    background: var(--df-surface);
+    border-color: var(--df-border-strong);
+    color: var(--df-text-muted);
+}
+#header p strong {
+    color: var(--df-text);
+}
+div#header a {
+    color: var(--df-cyan);
+}
+div#header a:hover {
+    color: var(--df-hot-pink);
+}
+
+/* ---- Top nav ---- */
+#nav {
+    background: var(--df-surface);
+    border-color: var(--df-border-strong);
+}
+#nav > li > a {
+    font-family: var(--df-font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+#nav li.inactive > a {
+    color: var(--df-text-muted);
+}
+#nav li.inactive:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+    border-color: var(--df-border-strong);
+    box-shadow: none;
+}
+#nav li.inactive:hover > a {
+    color: var(--df-text);
+}
+#nav li.active {
+    background-color: #f7f7f7;
+    border-color: var(--df-border-strong);
+    box-shadow: inset 0 2px 0 var(--df-pink);
+}
+#nav li.active > a {
+    color: var(--df-ink-pink);
+}
+#nav li.inactive > ul li a {
+    color: #333;
+    font-family: var(--df-font-body);
+    text-transform: none;
+    letter-spacing: normal;
+}
+#nav li.inactive > ul li a:hover {
+    color: var(--df-ink-pink);
+}
+
+/* ---- Sub nav & queue menus ---- */
+#sub_nav {
+    border-bottom: 2px solid var(--df-purple);
+}
+#sub_nav > li > a,
+#customQ_nav .jb-overflowmenu-menu-primary li.item > a {
+    color: #1a1a24;
+}
+#sub_nav > li > a:hover,
+#customQ_nav .jb-overflowmenu-menu-primary li.item:hover > a {
+    color: var(--df-ink-pink);
+}
+#sub_nav a.active, #sub_nav li.active > a,
+#customQ_nav .jb-overflowmenu-menu-primary li.item > a.active {
+    color: var(--df-ink-purple);
+}
+
+/* ---- Content ---- */
+#content {
+    border-color: var(--df-border-strong);
+    border-bottom-color: var(--df-purple);
+}
+a, .link {
+    color: var(--df-ink-purple);
+}
+a:hover, .link:hover {
+    color: var(--df-ink-pink);
+}
+h2 {
+    font-family: var(--df-font-display);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #1a1a24;
+}
+input:focus, select:focus, textarea:focus {
+    border-color: var(--df-purple);
+    box-shadow: 0 0 0 2px rgba(128, 0, 255, 0.18);
+    outline: none;
+}
+
+/* ---- List tables ---- */
+table.list {
+    background: #d9d9e3;
+    border-bottom-color: #d9d9e3;
+}
+table.list caption {
+    background: var(--df-surface-2);
+    color: var(--df-text);
+}
+table.list thead th {
+    background-color: #efeff5;
+    border-bottom: 2px solid var(--df-purple);
+    color: #1a1a24;
+    font-family: var(--df-font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+table.list th a, table.list thead th a {
+    color: #1a1a24;
+}
+table.list thead th a.asc, table.list thead th a.desc {
+    background-color: #ece2ff;
+}
+table.list tbody tr:nth-child(2n+1) td {
+    background-color: #f8f7fc;
+}
+table.list tbody tr:hover td, table.list tbody tr.highlight td,
+table.list tbody tr:nth-child(2n+1):hover td {
+    background: #f1e9ff;
+}
+
+/* ---- Buttons ---- */
+button[type=submit]:not(.pending):not(.success),
+input[type="submit"]:not(.pending):not(.success),
+.primary.button {
+    background-color: transparent;
+    background-image: var(--df-gradient);
+    box-shadow: none;
+    color: #fff;
+    font-weight: 600;
+}
+button[type=submit]:not(.pending):not(.success):hover,
+input[type="submit"]:not(.pending):not(.success):hover,
+input[type="submit"]:not(.pending):not(.success):active,
+.primary.button:hover {
+    background-color: transparent;
+    background-image: var(--df-gradient);
+    box-shadow: 0 0 12px rgba(255, 0, 110, 0.35);
+    color: #fff;
+    filter: brightness(1.1);
+}
+.button:hover, .button:active,
+.action-button:hover, .action-button:active,
+input[type=button]:hover, input[type=button]:active,
+input[type=reset]:hover, input[type=reset]:active {
+    box-shadow: 0 0 0 2px var(--df-purple) inset;
+    color: var(--df-ink-purple);
+}
+
+/* ---- Agent Dashboard accents (beat the page's inline <style>) ---- */
+#container #agent-dashboard .dash-tile {
+    border-top: 3px solid var(--df-purple);
+}
+#container #agent-dashboard .dash-tile.alert {
+    border-top-color: var(--df-pink);
+}
+/* Orbitron draws a slashed zero that reads as "no entry"; keep counts in Inter. */
+#container #agent-dashboard .dash-tile .count {
+    font-family: var(--df-font-body);
+    font-variant-numeric: tabular-nums;
+    color: #1a1a24;
+}
+#container #agent-dashboard .dash-tile .dash-label {
+    font-family: var(--df-font-display);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #555;
+}
+#container #agent-dashboard .dash-tile.alert .count,
+#container #agent-dashboard .flag-overdue {
+    color: var(--df-ink-pink);
+}
+#container #agent-dashboard td:first-child a {
+    font-family: var(--df-font-mono);
+}
+
+/* ---- Footer ---- */
+#footer {
+    color: var(--df-text-muted);
+}
+#footer a {
+    color: var(--df-cyan);
+}

@@ -17,6 +17,8 @@
 **********************************************************************/
 namespace osTicket\Mail;
 
+require_once INCLUDE_DIR.'class.sendgrid.php';
+
 class Mailer {
     private $from = null;
     var $email = null;
@@ -610,6 +612,20 @@ class Mailer {
             }
             // Attempt  Failed:  Reset FROM to original email and clear Sender
             $message->setOriginator($this->getFromEmail(), $this->getFromName());
+        }
+
+        // SendGrid Web API (HTTPS) for hosts that block outbound SMTP.
+        if (($apiKey = getenv('SENDGRID_API_KEY'))) {
+            try {
+                SendGrid::send($message, $apiKey,
+                    (bool) getenv('SENDGRID_SANDBOX_MODE'));
+                return $message->getId();
+            } catch (\Exception $ex) {
+                $this->logError(sprintf("%1\$s\n\n%2\$s\n",
+                        _S("Unable to email via SendGrid"),
+                        $ex->getMessage()
+                ));
+            }
         }
 
         // No SMTP or it FAILED....use Sendmail transport (PHP mail())

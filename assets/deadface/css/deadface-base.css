@@ -1,0 +1,55 @@
+/* DEADFACE CTF shared fonts and design tokens (colors from deadface.io). */
+
+@font-face {
+    font-family: "Orbitron";
+    src: url("../fonts/orbitron-latin.woff2") format("woff2");
+    font-weight: 400 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Inter";
+    src: url("../fonts/inter-latin.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("../fonts/jetbrains-mono-latin.woff2") format("woff2");
+    font-weight: 100 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --df-bg: #050508;
+    --df-bg-raised: #0a0a0f;
+    --df-surface: #121218;
+    --df-surface-2: #1a1a24;
+    --df-border: #1a1a24;
+    --df-border-strong: #2c2c3c;
+    --df-text: #e5e7eb;
+    --df-text-muted: #9ca3af;
+    --df-pink: #ff006e;
+    --df-hot-pink: #ff6ec7;
+    --df-cyan: #00d9ff;
+    --df-purple: #8000ff;
+    --df-violet: #c77dff;
+    --df-green: #06ffa5;
+
+    --df-font-display: "Orbitron", "Inter", system-ui, sans-serif;
+    --df-font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+    --df-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    --df-gradient: linear-gradient(90deg, var(--df-pink), var(--df-purple));
+    --df-grid: linear-gradient(rgba(0, 217, 255, 0.05) 1px, transparent 1px),
+               linear-gradient(90deg, rgba(0, 217, 255, 0.05) 1px, transparent 1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}

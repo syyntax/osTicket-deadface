@@ -85,7 +85,7 @@ if ($thisclient && $thisclient->isGuest()
                 </thead>
                <tr>
                    <th width="100"><?php echo __('Name');?>:</th>
-                   <td><?php echo mb_convert_case(Format::htmlchars($ticket->getName()), MB_CASE_TITLE); ?></td>
+                   <td><?php echo Format::htmlchars($ticket->getName()); ?></td>
                </tr>
                <tr>
                    <th width="100"><?php echo __('Email');?>:</th>

@@ -1,0 +1,576 @@
+/* DEADFACE CTF player portal theme. Visual only: never adds or changes text. */
+
+/* ---- Page ---- */
+html, body {
+    background-color: var(--df-bg);
+}
+body {
+    background-image: var(--df-grid);
+    background-size: 40px 40px;
+    background-attachment: fixed;
+    color: var(--df-text);
+}
+body, input, select, textarea, .button, .button:visited {
+    font-family: var(--df-font-body);
+    color: var(--df-text);
+}
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5000;
+    background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 3px);
+}
+::selection {
+    background: rgba(255, 0, 110, 0.35);
+    color: #fff;
+}
+
+#container {
+    margin: 24px auto;
+    background: rgba(10, 10, 15, 0.94);
+    border: 1px solid var(--df-border-strong);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(255, 0, 110, 0.12), 0 0 48px rgba(128, 0, 255, 0.18);
+}
+#container::before {
+    content: "";
+    display: block;
+    height: 3px;
+    background: var(--df-gradient);
+}
+
+/* ---- Header & nav ---- */
+#header {
+    background: transparent;
+}
+#header p {
+    color: var(--df-text-muted);
+}
+#header a {
+    color: var(--df-cyan);
+}
+#nav {
+    background: var(--df-surface);
+    border: 1px solid var(--df-border-strong);
+    border-radius: 4px;
+    box-shadow: 0 0 18px rgba(0, 217, 255, 0.06);
+}
+#nav li a {
+    color: var(--df-text-muted);
+    font-family: var(--df-font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.15s, background-color 0.15s, box-shadow 0.15s;
+}
+#nav li a:hover {
+    background-color: rgba(0, 217, 255, 0.1);
+    color: var(--df-cyan);
+}
+#nav li a.active {
+    background-color: rgba(255, 0, 110, 0.14);
+    color: var(--df-hot-pink);
+    box-shadow: inset 0 0 0 1px rgba(255, 0, 110, 0.55);
+}
+
+/* ---- Typography ---- */
+a, .link {
+    color: var(--df-cyan);
+    transition: color 0.15s;
+}
+a:hover, .link:hover {
+    color: var(--df-hot-pink);
+    border-bottom-color: var(--df-hot-pink);
+}
+a:focus-visible, .button:focus-visible, button:focus-visible,
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--df-cyan);
+    outline-offset: 2px;
+}
+h1 {
+    font-family: var(--df-font-display);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--df-cyan);
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.55), 0 0 22px rgba(0, 217, 255, 0.25);
+}
+h2, .subject {
+    color: var(--df-text);
+}
+h3 {
+    color: var(--df-hot-pink);
+}
+#content h2, #content h3, .form-header b, .sidebar section .header {
+    font-family: var(--df-font-display);
+    letter-spacing: 0.04em;
+}
+hr {
+    border-top-color: var(--df-border-strong);
+}
+.faded, #ticketForm td em, #clientLogin td em, #ticketForm div em, #clientLogin div em {
+    color: var(--df-text-muted);
+}
+.error, #clientLogin strong {
+    color: var(--df-hot-pink);
+}
+#ticketForm div.error label, #clientLogin div.error label {
+    color: var(--df-hot-pink);
+}
+#ticketForm div.error input, #clientLogin div.error input, .error input {
+    border-color: var(--df-pink);
+}
+
+/* ---- Notices ---- */
+#msg_notice, .notice_bar {
+    background-color: rgba(6, 255, 165, 0.08);
+    border-color: var(--df-green);
+    color: var(--df-text);
+}
+#msg_warning, .warning-banner, .warning_bar {
+    background-color: rgba(255, 110, 199, 0.08);
+    border-color: var(--df-hot-pink);
+    color: var(--df-text);
+}
+#msg_error, .error_bar {
+    background-color: rgba(255, 0, 110, 0.1);
+    border-color: var(--df-pink);
+    color: var(--df-text);
+}
+#msg_info {
+    background-color: rgba(0, 217, 255, 0.08);
+    border-color: var(--df-cyan);
+    color: var(--df-text);
+}
+.warning {
+    background: rgba(255, 110, 199, 0.1);
+}
+
+/* ---- Buttons ---- */
+.button, .button:visited, .green.button, .green.button:visited {
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid var(--df-cyan);
+    border-radius: 4px;
+    color: var(--df-cyan);
+    font-family: var(--df-font-display);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-shadow: 0 0 8px rgba(0, 217, 255, 0.55);
+    box-shadow: 0 0 12px rgba(0, 217, 255, 0.22), inset 0 0 12px rgba(0, 217, 255, 0.08);
+    transition: background-color 0.15s, color 0.15s, box-shadow 0.15s;
+}
+.button:hover, .green.button:hover {
+    background-color: rgba(0, 217, 255, 0.14);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.45), inset 0 0 12px rgba(0, 217, 255, 0.15);
+}
+.blue.button, .blue.button:visited,
+input[type="submit"], button[type="submit"], .btn {
+    background-color: transparent;
+    background-image: var(--df-gradient);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #fff;
+    font-family: var(--df-font-display);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-shadow: none;
+    box-shadow: 0 0 18px rgba(255, 0, 110, 0.35);
+    cursor: pointer;
+    transition: box-shadow 0.15s, filter 0.15s;
+}
+input[type="submit"], button[type="submit"], .btn {
+    padding: 6px 16px;
+    font-size: 12px;
+}
+.blue.button:hover, input[type="submit"]:hover, button[type="submit"]:hover, .btn:hover {
+    background-color: transparent;
+    color: #fff;
+    filter: brightness(1.12);
+    box-shadow: 0 0 28px rgba(255, 0, 110, 0.55);
+}
+/* osTicket's `#ticketForm div input { background: #fff }` shorthand wipes the
+   gradient on in-form buttons, so restate them at matching specificity. */
+#content form input[type="submit"], #content form button[type="submit"], #content form .btn {
+    background-color: transparent;
+    background-image: var(--df-gradient);
+    border: 1px solid transparent;
+    color: #fff;
+}
+/* osticket.js paints in-form submit text red (inline style) when a form
+   "changes", which also fires on page load; keep the text legible. */
+#content form input[type="submit"][style*="color"] {
+    color: #fff !important;
+}
+#content form input[type="reset"], #content form input[type="button"]:not(.ui-datepicker-trigger) {
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid var(--df-border-strong);
+    color: var(--df-text-muted);
+}
+input[type="reset"], input[type="button"]:not(.ui-datepicker-trigger) {
+    background: transparent;
+    border: 1px solid var(--df-border-strong);
+    border-radius: 4px;
+    color: var(--df-text-muted);
+    font-family: var(--df-font-display);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    cursor: pointer;
+}
+input[type="reset"]:hover, input[type="button"]:not(.ui-datepicker-trigger):hover {
+    border-color: var(--df-hot-pink);
+    color: var(--df-hot-pink);
+}
+.action-button {
+    background-color: var(--df-surface-2);
+    background-image: none;
+    border-color: var(--df-border-strong);
+    color: var(--df-text-muted) !important;
+}
+.action-button span, .action-button a {
+    color: var(--df-text-muted) !important;
+}
+.action-button:hover {
+    border-color: var(--df-cyan);
+}
+
+/* ---- Form fields ---- */
+input[type="text"], input[type="email"], input[type="password"], input[type="tel"],
+input[type="number"], input[type="search"], input:not([type]), select, textarea,
+#ticketForm div input:not([type="submit"]):not([type="reset"]):not([type="button"]),
+#clientLogin div input:not([type="submit"]):not([type="reset"]):not([type="button"]),
+#ticketForm div textarea, #clientLogin div textarea,
+#clientLogin input[type="text"], #clientLogin input[type="password"],
+#reply input[type="text"], #reply #response_options textarea,
+.searchbar .search, .search-form .search {
+    background-color: var(--df-surface);
+    color: var(--df-text);
+    border: 1px solid var(--df-border-strong);
+    border-radius: 4px;
+    box-shadow: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+#ticketForm div input[type="file"], #clientLogin div input[type="file"],
+input[type="checkbox"], input[type="radio"] {
+    background: transparent;
+    border: 0;
+}
+input:focus, select:focus, textarea:focus {
+    border-color: var(--df-cyan);
+    box-shadow: 0 0 0 2px rgba(0, 217, 255, 0.25);
+    outline: none;
+}
+::placeholder {
+    color: #6b7280;
+}
+input[type="checkbox"], input[type="radio"] {
+    accent-color: var(--df-pink);
+}
+select option {
+    background-color: var(--df-surface);
+    color: var(--df-text);
+}
+label.required, span.required {
+    color: var(--df-text);
+}
+
+/* ---- Panels ---- */
+#clientLogin {
+    background-color: var(--df-surface);
+    border-color: var(--df-border-strong);
+    box-shadow: 0 0 30px rgba(128, 0, 255, 0.12);
+}
+.login-box {
+    box-shadow: 12px 0 15px -15px rgba(0, 217, 255, 0.35);
+}
+#reply {
+    background: var(--df-surface);
+    border-color: var(--df-border-strong);
+}
+#reply h2 {
+    border-bottom-color: var(--df-border-strong);
+}
+.sidebar .content {
+    background: var(--df-surface);
+    border-color: var(--df-border-strong);
+}
+.search.well {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+.infoTable {
+    background: var(--df-surface);
+}
+.infoTable th {
+    color: var(--df-text-muted);
+}
+.thread-body {
+    background-color: transparent;
+    color: var(--df-text);
+}
+.thread-body h1 {
+    color: var(--df-cyan);
+}
+.thread-body h2, .thread-body h3, .thread-body h4, .thread-body h5, .thread-body h6,
+.thread-body strong, .thread-body b {
+    color: var(--df-text);
+}
+
+/* ---- Ticket thread ---- */
+#ticketInfo h1 small {
+    color: var(--df-text-muted);
+}
+#content td.headline {
+    background: var(--df-surface-2);
+    border-bottom-color: var(--df-border-strong);
+    color: var(--df-text);
+    font-family: var(--df-font-display);
+    letter-spacing: 0.04em;
+}
+.thread-entry::before, .thread-entry::after {
+    border-color: var(--df-border-strong);
+}
+#ticketThread::before {
+    border-left-color: var(--df-border-strong);
+}
+.thread-event .type-icon {
+    border-color: var(--df-border-strong);
+}
+/* The icon's ::after is a solid square that masks the connector line behind it. */
+.thread-event .type-icon::after {
+    border-color: var(--df-bg-raised);
+}
+.thread-entry .header {
+    border-color: var(--df-border-strong);
+    color: var(--df-text);
+}
+/* Solid tints so the speech-bubble arrows can match the header exactly. */
+.thread-entry.message .header {
+    background: #0a2230;
+}
+.thread-entry.avatar.message .header:before {
+    border-right-color: var(--df-border-strong);
+}
+.thread-entry.avatar.message .header:after {
+    border-right-color: #0a2230;
+}
+.thread-entry.response .header {
+    background: #1d0f33;
+}
+.thread-entry.avatar .header:before {
+    border-left-color: var(--df-border-strong);
+}
+.thread-entry.avatar.response .header:after {
+    border-left-color: #1d0f33;
+}
+.thread-entry .thread-body {
+    background: var(--df-surface);
+    border-color: var(--df-border-strong);
+}
+.thread-body .attachments {
+    background-color: var(--df-surface-2);
+    border-top-color: var(--df-border-strong);
+}
+.label {
+    background-color: var(--df-surface-2);
+}
+.label-bare {
+    background-color: transparent;
+    border-color: var(--df-border-strong);
+    color: var(--df-text-muted);
+}
+.thread-event {
+    color: var(--df-text-muted);
+}
+.type-icon {
+    background-color: var(--df-surface-2);
+    color: var(--df-text-muted);
+}
+
+/* ---- Tables ---- */
+#ticketTable {
+    border-color: var(--df-border-strong);
+}
+#ticketTable caption {
+    background: var(--df-surface-2);
+    border-color: var(--df-border-strong);
+    color: var(--df-text);
+}
+#ticketTable th {
+    background: var(--df-surface-2);
+    border-color: var(--df-border-strong);
+    color: var(--df-text);
+    font-family: var(--df-font-display);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+#ticketTable th a {
+    color: var(--df-text);
+}
+#ticketTable td {
+    border-color: var(--df-border-strong);
+}
+#ticketTable tr.alt td {
+    background: rgba(255, 255, 255, 0.025);
+}
+#ticketTable td a, .Icon {
+    color: var(--df-cyan);
+    font-family: var(--df-font-mono);
+}
+
+/* ---- Knowledge base ---- */
+#kb > li, #faq ol, #faq ol li a {
+    border-color: var(--df-border-strong);
+}
+#kb > li {
+    background: transparent;
+}
+#faq ol li a:hover {
+    background-color: rgba(0, 217, 255, 0.08);
+}
+#faq .article-meta {
+    background: var(--df-surface);
+}
+.featured-category i {
+    color: var(--df-cyan);
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+}
+
+/* ---- Footer & overlays ---- */
+#footer, #footer a {
+    color: var(--df-text-muted);
+}
+#footer {
+    padding-bottom: 20px;
+}
+#footer #poweredBy {
+    filter: invert(1) hue-rotate(180deg) opacity(0.55);
+}
+#loading {
+    background-color: var(--df-surface);
+    border-color: var(--df-pink);
+    color: var(--df-text);
+}
+#loading h4 {
+    color: var(--df-hot-pink);
+}
+
+/* ---- Rich text editor (Redactor) ---- */
+.redactor-box, .redactor-box.redactor-styles-on {
+    background: var(--df-surface);
+    border: 1px solid var(--df-border-strong);
+    border-radius: 4px;
+}
+/* Redactor's `.redactor-box.redactor-styles-on .redactor-toolbar.redactor-toolbar`
+   outranks plain class selectors. */
+#content .redactor-box .redactor-toolbar,
+#content .redactor-box.redactor-styles-on .redactor-toolbar.redactor-toolbar {
+    background: var(--df-surface-2);
+    border-bottom: 1px solid var(--df-border-strong);
+    box-shadow: none;
+}
+#content .redactor-toolbar a, #content .redactor-toolbar a.re-button-icon {
+    background: transparent;
+    color: var(--df-text-muted);
+}
+#content .redactor-toolbar a:hover, #content .redactor-toolbar a.redactor-button-active {
+    background: rgba(0, 217, 255, 0.12);
+    color: var(--df-cyan);
+}
+.redactor-in, .redactor-styles, .redactor-editor, .redactor-box .redactor-in {
+    background: var(--df-surface);
+    color: var(--df-text);
+}
+.redactor-placeholder:before {
+    color: #6b7280;
+}
+.redactor-dropdown {
+    background: var(--df-surface-2);
+    border-color: var(--df-border-strong);
+    color: var(--df-text);
+}
+.redactor-dropdown a {
+    color: var(--df-text);
+}
+.redactor-dropdown a:hover {
+    background: rgba(255, 0, 110, 0.2);
+}
+
+/* ---- Select2 ---- */
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--multiple {
+    background-color: var(--df-surface);
+    border-color: var(--df-border-strong);
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered,
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    color: var(--df-text);
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: var(--df-surface-2);
+    border-color: var(--df-border-strong);
+}
+.select2-dropdown {
+    background-color: var(--df-surface);
+    border-color: var(--df-border-strong);
+    color: var(--df-text);
+}
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    background-color: var(--df-surface-2);
+    border-color: var(--df-border-strong);
+    color: var(--df-text);
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: rgba(255, 0, 110, 0.3);
+    color: #fff;
+}
+
+/* ---- jQuery UI (datepicker) ---- */
+.ui-widget-content {
+    background: var(--df-surface);
+    border-color: var(--df-border-strong);
+    color: var(--df-text);
+}
+.ui-widget-header {
+    background: var(--df-surface-2);
+    border-color: var(--df-border-strong);
+    color: var(--df-text);
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    background: var(--df-surface-2);
+    border-color: var(--df-border-strong);
+    color: var(--df-text);
+}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover {
+    background: rgba(0, 217, 255, 0.12);
+    border-color: var(--df-cyan);
+    color: var(--df-cyan);
+}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-state-highlight, .ui-widget-content .ui-state-highlight {
+    background: var(--df-pink);
+    border-color: var(--df-pink);
+    color: #fff;
+}
+
+/* ---- Attachments dropzone ---- */
+.filedrop .dropzone {
+    background: var(--df-surface);
+    border-color: var(--df-border-strong);
+    color: var(--df-text-muted);
+}
+.filedrop .files .file {
+    background: var(--df-surface-2);
+    border-color: var(--df-border-strong);
+    color: var(--df-text);
+}

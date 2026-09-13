@@ -1,0 +1,91 @@
+/* DEADFACE CTF staff login page. Visual only: never adds or changes text. */
+
+#loginBody {
+    background-color: var(--df-bg);
+    color: var(--df-text);
+}
+#loginBody, #loginBody input, #loginBody button {
+    font-family: var(--df-font-body);
+    color: var(--df-text);
+}
+
+#brickwall, #background {
+    background-color: var(--df-bg);
+    background-image:
+        radial-gradient(circle at 18% 22%, rgba(128, 0, 255, 0.28), transparent 42%),
+        radial-gradient(circle at 82% 78%, rgba(255, 0, 110, 0.22), transparent 45%),
+        var(--df-grid);
+    background-size: cover, cover, 40px 40px;
+}
+
+#loginBox {
+    color: var(--df-text);
+    box-shadow: 0 0 44px rgba(255, 0, 110, 0.22), 0 0 0 1px rgba(0, 217, 255, 0.18);
+}
+#loginBox:after {
+    background-color: rgba(18, 18, 24, 0.94);
+    border: 1px solid var(--df-border-strong);
+}
+#loginBox::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 5px 5px 0 0;
+    background: var(--df-gradient);
+}
+
+#loginBox h1, #loginBox h3 {
+    font-family: var(--df-font-display);
+    letter-spacing: 0.04em;
+    color: var(--df-cyan);
+}
+#loginBox a {
+    color: var(--df-cyan);
+}
+#loginBox a:hover {
+    color: var(--df-hot-pink);
+}
+#loginBox .banner, #loginBox small {
+    color: var(--df-text-muted);
+}
+
+#loginBox input[type="text"], #loginBox input[type="password"], #loginBox input:not([type]) {
+    background-color: var(--df-surface);
+    border: 1px solid var(--df-border-strong);
+    border-radius: 4px;
+    color: var(--df-text);
+}
+#loginBox input:focus {
+    border-color: var(--df-cyan);
+    box-shadow: 0 0 0 2px rgba(0, 217, 255, 0.25);
+    outline: none;
+}
+#loginBox input::placeholder {
+    color: #6b7280;
+}
+
+#loginBox button.submit, #loginBox .button {
+    background-color: transparent;
+    background-image: var(--df-gradient);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #fff;
+    font-family: var(--df-font-display);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-shadow: none;
+    box-shadow: 0 0 18px rgba(255, 0, 110, 0.35);
+    cursor: pointer;
+}
+#loginBox button.submit:hover, #loginBox .button:hover {
+    filter: brightness(1.12);
+    box-shadow: 0 0 28px rgba(255, 0, 110, 0.55);
+}
+#loginBox button:focus-visible, #loginBox a:focus-visible {
+    outline: 2px solid var(--df-cyan);
+    outline-offset: 2px;
+}

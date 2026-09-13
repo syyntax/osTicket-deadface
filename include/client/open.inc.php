@@ -85,6 +85,29 @@ if ($info['topicId'] && ($topic=Topic::lookup($info['topicId']))) {
         </td>
     </tr>
     </tbody>
+    <tbody>
+    <tr><td colspan="2"><hr />
+        <div class="form-header" style="margin-bottom:0.5em">
+        <b><?php echo __('Staff Member'); ?></b>
+        </div>
+    </td></tr>
+    <tr>
+        <td colspan="2">
+            <select id="routeTo" name="routeTo">
+                <option value="all" <?php
+                    if (!$info['routeTo'] || $info['routeTo'] == 'all') echo 'selected="selected"';
+                    ?>><?php echo __('All Staff'); ?></option>
+                <?php
+                foreach (Staff::getDiscordRoutingOptions() as $id => $handle) {
+                    echo sprintf('<option value="%d" %s>@%s</option>',
+                            $id, ($info['routeTo'] == $id) ? 'selected="selected"' : '',
+                            Format::htmlchars($handle));
+                } ?>
+            </select>
+            <font class="error">*&nbsp;<?php echo $errors['routeTo']; ?></font>
+        </td>
+    </tr>
+    </tbody>
     <tbody id="dynamic-form">
         <?php
         $options = array('mode' => 'create');

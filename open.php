@@ -26,6 +26,24 @@ if ($_POST) {
 
     $vars = $_POST;
     $vars['deptId']=$vars['emailId']=0; //Just Making sure we don't accept crap...only topicId is expected.
+    // Ticket::create() trusts these from $vars for staff/API/filter use;
+    // players must never be able to supply them.
+    foreach (array('uid', 'staffId', 'teamId', 'assignId', 'slaId',
+            'priorityId', 'statusId', 'duedate', 'source', 'ip', 'note',
+            'cannedResponseId', 'system_emails', 'ccs', 'autorespond',
+            'mailflags') as $k)
+        unset($vars[$k]);
+
+    if (!isset($vars['routeTo']) || $vars['routeTo'] === '') {
+        $errors['routeTo'] = __('Select a Staff member or All Staff');
+    } elseif ($vars['routeTo'] !== 'all') {
+        $routing = Staff::getDiscordRoutingOptions();
+        if (ctype_digit((string) $vars['routeTo']) && isset($routing[(int) $vars['routeTo']]))
+            $vars['staffId'] = (int) $vars['routeTo'];
+        else
+            $errors['routeTo'] = __('Select a valid Staff member');
+    }
+
     if ($thisclient) {
         $vars['uid']=$thisclient->getId();
     } elseif($cfg->isCaptchaEnabled()) {

@@ -1,0 +1,8 @@
+# osTicket's SQL (and a lot of its legacy query code) predates modern
+# strict SQL modes. Running with defaults on MySQL 8 / MariaDB 10.x
+# strict mode causes install and runtime failures (ONLY_FULL_GROUP_BY,
+# STRICT_TRANS_TABLES, zero-date handling, etc). Relax it for this
+# instance only; this is a well-known requirement for osTicket, not a
+# general-purpose recommendation.
+[mysqld]
+sql_mode = ""

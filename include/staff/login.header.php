@@ -10,6 +10,8 @@ header("Content-Security-Policy: frame-ancestors ".$cfg->getAllowIframes()."; sc
     <title>osTicket :: <?php echo __('Agent Login'); ?></title>
     <link rel="stylesheet" href="css/login.css" type="text/css" />
     <link type="text/css" rel="stylesheet" href="<?php echo ROOT_PATH; ?>css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="<?php echo ROOT_PATH; ?>assets/deadface/css/deadface-base.css" media="screen">
+    <link type="text/css" rel="stylesheet" href="<?php echo ROOT_PATH; ?>assets/deadface/css/deadface-scp-login.css" media="screen">
     <meta name="robots" content="noindex" />
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="pragma" content="no-cache" />

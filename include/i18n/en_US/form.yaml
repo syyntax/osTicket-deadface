@@ -41,6 +41,7 @@
     - type: text # notrans
       name: email # notrans
       label: Email Address
+      hint: Use the same email address you registered for DEADFACE CTF with.
       sort: 1
       flags: 0x777B3
       configuration:
@@ -49,7 +50,7 @@
         validator: email # notrans
     - type: text # notrans
       name: name # notrans
-      label: Full Name
+      label: DEADFACE CTF Username
       sort: 2
       flags: 0x777B3
       configuration:

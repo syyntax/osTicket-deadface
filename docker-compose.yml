@@ -1,0 +1,63 @@
+services:
+  db:
+    image: mariadb:10.11
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: ${DB_NAME:-osticket}
+      MARIADB_USER: ${DB_USER:-osticket}
+      MARIADB_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?set DB_ROOT_PASSWORD in .env}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./docker/mysql/osticket.cnf:/etc/mysql/conf.d/osticket.cnf:ro
+    networks:
+      - osticket
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p\"$$MARIADB_ROOT_PASSWORD\" --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_NAME: ${DB_NAME:-osticket}
+      DB_USER: ${DB_USER:-osticket}
+      DB_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+      DB_TABLE_PREFIX: ${DB_TABLE_PREFIX:-ost_}
+      OSTICKET_SITE_NAME: ${OSTICKET_SITE_NAME:-DEADFACE CTF Support}
+      OSTICKET_DEFAULT_EMAIL: ${OSTICKET_DEFAULT_EMAIL:?set OSTICKET_DEFAULT_EMAIL in .env}
+      OSTICKET_LANG: ${OSTICKET_LANG:-en_US}
+      OSTICKET_TIMEZONE: ${OSTICKET_TIMEZONE:-UTC}
+      OSTICKET_ADMIN_FNAME: ${OSTICKET_ADMIN_FNAME:?set OSTICKET_ADMIN_FNAME in .env}
+      OSTICKET_ADMIN_LNAME: ${OSTICKET_ADMIN_LNAME:?set OSTICKET_ADMIN_LNAME in .env}
+      OSTICKET_ADMIN_EMAIL: ${OSTICKET_ADMIN_EMAIL:?set OSTICKET_ADMIN_EMAIL in .env}
+      OSTICKET_ADMIN_USERNAME: ${OSTICKET_ADMIN_USERNAME:-dctf-admin}
+      OSTICKET_ADMIN_PASSWORD: ${OSTICKET_ADMIN_PASSWORD:?set OSTICKET_ADMIN_PASSWORD in .env}
+      # Outbound mail goes through SendGrid's HTTPS API (DigitalOcean blocks
+      # SMTP). Leave empty to fall back to osTicket's SMTP/sendmail path.
+      SENDGRID_API_KEY: ${SENDGRID_API_KEY:-}
+    volumes:
+      - osticket_config:/var/www/html/data/config
+#    ports:
+      # Standalone for now, per PLAN.md: published directly so the app can
+      # be tested outside of `rev-proxy`. Drop this and join rev-proxy's
+      # shared network when this instance moves behind it.
+#      - "${APP_HTTP_PORT:-8080}:80"
+    networks:
+      - osticket
+
+networks:
+  osticket:
+    driver: bridge
+
+volumes:
+  db_data:
+  osticket_config:

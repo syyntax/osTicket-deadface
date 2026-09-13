@@ -128,7 +128,7 @@ class StaffNav {
         if(!isset($this->tabs)) {
             $this->tabs = array();
             $this->tabs['dashboard'] = array(
-                'desc'=>__('Dashboard'),'href'=>'dashboard.php','title'=>__('Agent Dashboard'), "class"=>"no-pjax"
+                'desc'=>__('Dashboard'),'href'=>'agent-dashboard.php','title'=>__('Agent Dashboard'), "class"=>"no-pjax"
             );
             if ($thisstaff->hasPerm(User::PERM_DIRECTORY)) {
                 $this->tabs['users'] = array(
@@ -158,6 +158,7 @@ class StaffNav {
                     $subnav[]=array('desc'=>__('Tasks'), 'href'=>'tasks.php', 'iconclass'=>'Ticket', 'droponly'=>true);
                     break;
                 case 'dashboard':
+                    $subnav[]=array('desc'=>__('Agent Dashboard'),'href'=>'agent-dashboard.php','iconclass'=>'Ticket');
                     $subnav[]=array('desc'=>__('Dashboard'),'href'=>'dashboard.php','iconclass'=>'logs');
                     $subnav[]=array('desc'=>__('Agent Directory'),'href'=>'directory.php','iconclass'=>'teams');
                     $subnav[]=array('desc'=>__('My Profile'),'href'=>'profile.php','iconclass'=>'users');

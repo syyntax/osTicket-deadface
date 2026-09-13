@@ -90,6 +90,15 @@ $extras = new ArrayObject();
           </td>
         </tr>
         <tr>
+          <td><?php echo __('Discord Handle'); ?>:</td>
+          <td>
+            <input type="text" size="20" maxlength="33" style="width: 145px" name="discord_handle"
+              value="<?php echo Format::htmlchars($staff->getDiscordHandle()); ?>"
+              placeholder="<?php echo __('e.g. syyntax'); ?>" />
+            <div class="error"><?php echo $errors['discord_handle']; ?></div>
+          </td>
+        </tr>
+        <tr>
           <td><?php echo __('Phone Number');?>:</td>
           <td>
             <input type="tel" size="18" name="phone" class="auto phone"

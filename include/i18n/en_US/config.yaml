@@ -45,7 +45,7 @@ core:
     ticket_alert_active: 1
     ticket_alert_admin: 1
     ticket_alert_dept_manager: 1
-    ticket_alert_dept_members: 0
+    ticket_alert_dept_members: 1
     message_alert_active: 1
     message_alert_laststaff: 1
     message_alert_assigned: 1

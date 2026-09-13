@@ -783,6 +783,36 @@ implements AuthenticatedUser, EmailContact, TemplateVariable, Searchable {
             : $this->_extra;
     }
 
+    function getDiscordHandle() {
+        return $this->getExtraAttr('discord_handle');
+    }
+
+    // Agents a player may route a new ticket to: available and with a handle.
+    static function getDiscordRoutingOptions() {
+        $options = array();
+        foreach (static::objects()->filter(array('isactive' => 1)) as $staff) {
+            if ($staff->isAvailable() && ($handle = $staff->getDiscordHandle()))
+                $options[$staff->getId()] = $handle;
+        }
+        natcasesort($options);
+        return $options;
+    }
+
+    // Stored in the `extra` JSON column, so lookup scans agents in PHP.
+    static function getIdByDiscordHandle($handle) {
+        $handle = mb_strtolower(ltrim(trim($handle), '@'));
+        if (!$handle)
+            return null;
+        foreach (static::objects()->values_flat('staff_id', 'extra') as $row) {
+            list($id, $extra) = $row;
+            $data = $extra ? JsonDataParser::decode($extra) : null;
+            if (!empty($data['discord_handle'])
+                    && mb_strtolower($data['discord_handle']) === $handle)
+                return $id;
+        }
+        return null;
+    }
+
     function setExtraAttr($attr, $value, $commit=true) {
         $this->getExtraAttr();
         $this->_extra[$attr] = $value;
@@ -1250,6 +1280,15 @@ implements AuthenticatedUser, EmailContact, TemplateVariable, Searchable {
         if($vars['mobile'] && !Validator::is_phone($vars['mobile']))
             $errors['mobile']=__('Valid phone number is required');
 
+        $vars['discord_handle'] = ltrim(trim(Format::striptags($vars['discord_handle'])), '@');
+        if ($vars['discord_handle']) {
+            if (!preg_match('/^[^\s@#:`]{2,32}$/u', $vars['discord_handle']))
+                $errors['discord_handle'] = __('Valid Discord handle is required (2-32 characters, no spaces)');
+            elseif (($uid = static::getIdByDiscordHandle($vars['discord_handle']))
+                    && (!isset($this->staff_id) || $uid != $this->getId()))
+                $errors['discord_handle'] = __('Discord handle already in use by another agent');
+        }
+
         if(!$vars['dept_id'])
             $errors['dept_id']=__('Department is required');
         if(!$vars['role_id'])
@@ -1298,6 +1337,7 @@ implements AuthenticatedUser, EmailContact, TemplateVariable, Searchable {
         $this->phone_ext = $vars['phone_ext'];
         $this->mobile = Format::phone($vars['mobile']);
         $this->notes = Format::sanitize($vars['notes']);
+        $this->setExtraAttr('discord_handle', $vars['discord_handle'] ?: null, false);
 
         // Set staff password if exists
         if (!$vars['welcome_email'] && $vars['passwd1']) {
